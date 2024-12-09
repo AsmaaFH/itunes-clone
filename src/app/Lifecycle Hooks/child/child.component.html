@@ -1,0 +1,6 @@
+<app-card #cardComp [customStyle]="{ padding: '30px', width: 'fit-content'}">
+  <p>child works!</p>
+  <ul *ngFor="let item of items">
+    <li>{{ item }}</li>
+  </ul>
+</app-card>

@@ -1,0 +1,14 @@
+.active a{
+  color: red;
+}
+ul{
+  display: flex
+;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 14px;
+}
+nav{
+  padding: 25px;
+}

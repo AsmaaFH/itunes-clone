@@ -1,0 +1,72 @@
+<form novalidate [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+  <fieldset formGroupName="name">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text"
+             class="form-control"
+             formControlName="firstName"
+             required>
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text"
+             class="form-control"
+             formControlName="lastName"
+             required>
+    </div>
+  </fieldset>
+
+  <div class="form-group" [ngClass]="{
+    'has-danger': myForm.get('email')?.invalid && myForm.get('email')?.dirty,
+    'has-success': myForm.get('email')?.valid && myForm.get('email')?.dirty
+  }">
+    <label>Email</label>
+    <input type="email"
+           class="form-control"
+           formControlName="email"
+           required>
+
+    <pre>Dirty? {{ myForm.get('email')?.dirty }}</pre>
+    <pre>Pristine? {{ myForm.get('email')?.pristine }}</pre>
+    <pre>Touched? {{ myForm.get('email')?.touched }}</pre>
+    <pre>Valid? {{ myForm.get('email')?.valid }}</pre>
+    <pre>Invalid? {{ myForm.get('email')?.invalid }}</pre>
+  </div>
+
+  <div class="form-group" [ngClass]="{
+    'has-danger': myForm.get('password')?.invalid && (myForm.get('password')?.dirty || myForm.get('password')?.touched),
+    'has-success': myForm.get('password')?.valid && (myForm.get('password')?.dirty || myForm.get('password')?.touched)
+  }">
+    <label>Password</label>
+    <input type="password"
+           class="form-control"
+           formControlName="password"
+           required>
+
+    <div class="form-control-feedback"
+         *ngIf="myForm.get('password')?.errors && (myForm.get('password')?.dirty || myForm.get('password')?.touched)">
+      <p *ngIf="myForm.get('password')?.errors?.['required']">Password is required</p>
+      <p *ngIf="myForm.get('password')?.errors?.['minlength']">
+        Password must be {{myForm.get('password')?.errors?.['minlength'].requiredLength}} characters long, we need another
+        {{myForm.get('password')?.errors?.['minlength'].requiredLength - myForm.get('password')?.errors?.['minlength'].actualLength}}
+        characters
+      </p>
+    </div>
+
+    <pre>Errors:  {{ myForm.get('password')?.errors | json }}</pre>
+  </div>
+
+  <div class="form-group">
+    <label>Language</label>
+    <select class="form-control" formControlName="language">
+      <option value="">Please select a language</option>
+      <option *ngFor="let lang of langs" [value]="lang">{{ lang }}</option>
+    </select>
+  </div>
+
+  <pre>{{ myForm.value | json }}</pre>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
