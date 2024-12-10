@@ -10,5 +10,10 @@ ul{
     gap: 14px;
 }
 nav{
-  padding: 25px;
+  padding: 10px 20px;
+  .navbar-brand{
+    img{
+      width: 50px;
+    }
+  }
 }
